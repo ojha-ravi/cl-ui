@@ -1,6 +1,14 @@
 import * as React from 'react';
 import { render } from 'react-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import '../css/app.less';
+import LoginLayout from './login/index';
 
-const App = () => <div>Hello World</div>;
+// IndexRoute
+const Routes = (
+  <Router>
+    <Route path="/" component={LoginLayout} />
+  </Router>
+);
 
-render(<App />, window.document.querySelector('.app'));
+render(Routes, window.document.querySelector('.app'));
