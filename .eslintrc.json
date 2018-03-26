@@ -1,8 +1,6 @@
 {
   "globals": {
-    "React": true,
-    "_": true,
-    "Router": true
+    "window": true
   },
   "extends": ["airbnb", "prettier"],
   "plugins": ["jsx-a11y", "react"]

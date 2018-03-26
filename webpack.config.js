@@ -38,8 +38,6 @@ module.exports = {
     ],
   },
   plugins: [
-    // CommonsChunkPlugin must be at index 0, it will be spliced out when running tests
-    // Provides without needing import:
     new webpack.ProvidePlugin({
       React: 'react',
       _: 'lodash',
