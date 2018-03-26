@@ -1,3 +1,9 @@
 {
-  "extends": ["airbnb", "prettier"]
+  "globals": {
+    "React": true,
+    "_": true,
+    "Router": true
+  },
+  "extends": ["airbnb", "prettier"],
+  "plugins": ["jsx-a11y", "react"]
 }
