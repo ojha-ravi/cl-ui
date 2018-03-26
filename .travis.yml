@@ -1,0 +1,29 @@
+language: node_js
+
+before_script:
+  - npm install
+
+cache:
+  bundler: true
+  directories:
+    - "node_modules"
+
+sudo: required
+dist: trusty
+group: edge
+addons:
+  apt:
+    sources:
+    - google-chrome
+    packages:
+    - google-chrome-stable
+env:
+  global:
+  - TRAVIS_NODE_VERSION=9.9.0
+
+notifications:
+  email:
+    recipients:
+    - rbojha008@gmail.com
+    on_success: never
+    on_failure: always
