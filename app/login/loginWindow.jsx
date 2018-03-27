@@ -16,7 +16,7 @@ const LoginWindow = () => (
 
         <FormGroup controlId="formHorizontalPassword">
           <h5>Password</h5>
-          <FormControl type="text" />
+          <FormControl type="password" />
         </FormGroup>
         <FormGroup>
           <a href="google.com">Forgot Password?</a>
