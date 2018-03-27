@@ -5,7 +5,7 @@ const BUILD_DIR = path.resolve(__dirname, 'dist');
 const APP_DIR = path.resolve(__dirname, 'app');
 
 module.exports = {
-  entry: `${APP_DIR}/app.jsx`,
+  entry: `${APP_DIR}/routes.jsx`,
   mode: 'development', // 'production' | 'development' | 'none'
   //   optimization: {
   //     splitChunks: {

@@ -1,14 +1,10 @@
-import * as React from 'react';
-import { render } from 'react-dom';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import '../css/app.less';
-import LoginLayout from './login/index';
+import React from 'react';
+import PropTypes from 'prop-types';
 
-// IndexRoute
-const Routes = (
-  <Router>
-    <Route path="/" component={LoginLayout} />
-  </Router>
-);
+const App = ({ children }) => <div>{children}</div>;
 
-render(Routes, window.document.querySelector('.app'));
+App.propTypes = {
+  children: PropTypes.node.isRequired
+};
+
+export default App;
