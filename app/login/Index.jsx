@@ -1,6 +1,6 @@
 import React from 'react';
 import img from '../../assets/cls.jpg';
-import LoginWindow from './loginWindow';
+import LoginWindow from './LoginWindow';
 
 // import PropTypes from 'prop-types';
 

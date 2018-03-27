@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Form, FormGroup, FormControl, Checkbox, Button } from 'react-bootstrap';
 import logo from '../../assets/logo.png';
 // import PropTypes from 'prop-types';
@@ -19,7 +20,7 @@ const LoginWindow = () => (
           <FormControl type="password" />
         </FormGroup>
         <FormGroup>
-          <a href="google.com">Forgot Password?</a>
+          <Link to="/forgotpassword">Forgot Password?</Link>
         </FormGroup>
         <FormGroup>
           <div className="full-btn">
