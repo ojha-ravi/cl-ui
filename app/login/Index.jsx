@@ -1,18 +1,33 @@
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { withRouter } from 'react-router';
 import img from '../../assets/cls.jpg';
 import LoginWindow from './LoginWindow';
+import login from '../actions/loginActions';
 
-// import PropTypes from 'prop-types';
+class Index extends Component {
+  componentDidMount() {
+    this.props.login();
+  }
 
-const index = () => (
-  <div className="main">
-    <img className="bg-img" src={img} alt="Login" />
-    <LoginWindow />
-  </div>
-);
+  render() {
+    return (
+      <div className="main">
+        <img className="bg-img" src={img} alt="Login" />
+        <LoginWindow />
+      </div>
+    );
+  }
+}
 
-// index.propTypes = {
-//   children: PropTypes.node.isRequired
-// };
+Index.propTypes = {
+  login: PropTypes.func.isRequired
+};
 
-export default index;
+const mapDispatchToProps = {
+  login
+};
+
+export default withRouter(connect(undefined, mapDispatchToProps)(Index));
