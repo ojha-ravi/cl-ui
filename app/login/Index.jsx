@@ -1,26 +1,17 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router';
 import img from '../../assets/cls.jpg';
 import LoginWindow from './LoginWindow';
-import login from '../actions/loginActions';
+import { login } from '../actions/loginActions';
 
-class Index extends Component {
-  componentDidMount() {
-    this.props.login();
-  }
-
-  render() {
-    return (
-      <div className="main">
-        <img className="bg-img" src={img} alt="Login" />
-        <LoginWindow />
-      </div>
-    );
-  }
-}
+const Index = props => (
+  <div className="main">
+    <img className="bg-img" src={img} alt="Login" />
+    <LoginWindow onLoginClick={props.login} />
+  </div>
+);
 
 Index.propTypes = {
   login: PropTypes.func.isRequired

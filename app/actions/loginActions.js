@@ -8,10 +8,10 @@ export function loginSuccess(data) {
   };
 }
 
-export default function login() {
+export function login(params) {
   return dispatch =>
-    loginHandler()
-      .then(res => res.data)
+    loginHandler(params)
+      .then(res => res.data.data)
       .then(loginSuccess)
       .then(dispatch);
 }

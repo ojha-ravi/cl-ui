@@ -1,5 +1,5 @@
 import axios from './index';
 
-export default function login() {
-  return axios.get('/login');
+export default function login(params) {
+  return axios.get('/login', { params });
 }
