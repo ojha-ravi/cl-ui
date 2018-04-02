@@ -16,6 +16,9 @@ class Index extends Component {
         <pre>
           <code>{JSON.stringify(this.props.loggedInUser, 4, 4)}</code>
         </pre>
+        <pre>
+          <code>{JSON.stringify(this.props.currentProfile, 4, 4)}</code>
+        </pre>
       </div>
     );
   }
@@ -26,14 +29,33 @@ Index.propTypes = {
     user_id: PropTypes.string,
     id: PropTypes.string
   }),
+  currentProfile: PropTypes.shape({
+    id: PropTypes.string,
+    user_id: PropTypes.string,
+    email: PropTypes.string,
+    title: PropTypes.string,
+    sex: PropTypes.string,
+    first_name: PropTypes.string,
+    last_name: PropTypes.string,
+    middle_name: PropTypes.string,
+    work_destination: PropTypes.string,
+    address_1: PropTypes.string,
+    address_2: PropTypes.string,
+    address_3: PropTypes.string,
+    profile_image: PropTypes.string
+  }),
   getUserProfile: PropTypes.func.isRequired
 };
 
 Index.defaultProps = {
-  loggedInUser: {}
+  loggedInUser: {},
+  currentProfile: {}
 };
 
-const mapStateToProps = ({ loginReducer }) => ({ loggedInUser: loginReducer.loggedInUser });
+const mapStateToProps = ({ loginReducer, profileReducer }) => ({
+  loggedInUser: loginReducer.loggedInUser,
+  currentProfile: profileReducer.currentProfile
+});
 
 const mapDispatchToProps = {
   getUserProfile: profileActions.getUserProfile
