@@ -3,33 +3,19 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as profileActions from '../actions/profileActions';
 import NavBar from '../common/navBar/navBar';
-
-const baseUrl = 'http://localhost:3000/';
+import MainContent from './MainContent';
 
 class Index extends Component {
   componentDidMount() {
-    this.props.getUserProfile({
-      userId: this.props.loggedInUser.user_id
-    });
+    if (this.props.loggedInUser.user_id) {
+      this.props.getUserProfile({
+        userId: this.props.loggedInUser.user_id
+      });
+    }
   }
 
   render() {
-    const { profile_image } = this.props.currentProfile;
-    let profileImage = null;
-    if (profile_image) {
-      profileImage = (
-        <img className="profile-image" src={baseUrl + this.props.currentProfile.profile_image} alt="Login" />
-      );
-    }
-    return [
-      <NavBar key="navBar" />,
-      <div className="container padding-top-20px" key="content">
-        <div className="row">
-          <div className="col-sm-3 no-padding">{profileImage}</div>
-          <div className="col-sm-9">Hello World</div>
-        </div>
-      </div>
-    ];
+    return [<NavBar key="navBar" />, <MainContent currentProfile={this.props.currentProfile} key="content" />];
   }
 }
 
