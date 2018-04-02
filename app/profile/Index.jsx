@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import * as profileActions from '../actions/profileActions';
+import NavBar from '../common/navBar/navBar';
+
+const baseUrl = 'http://localhost:3000/';
 
 class Index extends Component {
   componentDidMount() {
@@ -11,16 +14,22 @@ class Index extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <pre>
-          <code>{JSON.stringify(this.props.loggedInUser, 4, 4)}</code>
-        </pre>
-        <pre>
-          <code>{JSON.stringify(this.props.currentProfile, 4, 4)}</code>
-        </pre>
+    const { profile_image } = this.props.currentProfile;
+    let profileImage = null;
+    if (profile_image) {
+      profileImage = (
+        <img className="profile-image" src={baseUrl + this.props.currentProfile.profile_image} alt="Login" />
+      );
+    }
+    return [
+      <NavBar key="navBar" />,
+      <div className="container padding-top-20px" key="content">
+        <div className="row">
+          <div className="col-sm-3 no-padding">{profileImage}</div>
+          <div className="col-sm-9">Hello World</div>
+        </div>
       </div>
-    );
+    ];
   }
 }
 

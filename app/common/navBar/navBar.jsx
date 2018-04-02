@@ -1,16 +1,18 @@
-// import React from 'react';
+import React from 'react';
 // import PropTypes from 'prop-types';
 
-// const NavBar = props => {
-// 	return (
-// 		<div>
-// 			<img src="./ass" alt="" sizes="" srcset=""/>
-// 		</div>
-// 	);
-// };
+/* eslint-disable jsx-a11y/anchor-is-valid */
+const NavBar = () => (
+  <div className="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div className="container no-padding">
+      <a className="navbar-brand" href="#">
+        Consumer Lawyer
+      </a>
+    </div>
+  </div>
+);
+/* eslint-enable jsx-a11y/anchor-is-valid */
 
-// NavBar.propTypes = {
+// NavBar.propTypes = {};
 
-// };
-
-// export default NavBar;
+export default NavBar;
