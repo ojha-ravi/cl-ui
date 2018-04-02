@@ -1,10 +1,26 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import LoginLayout from './login/Index';
+import ProfileLayout from './profile/Index';
 
-const App = ({ children }) => <div>{children}</div>;
+const App = props => (
+  <div>{props.loggedInUser.id ? <ProfileLayout loggedInUser={props.loggedInUser} /> : <LoginLayout />}</div>
+);
 
 App.propTypes = {
-  children: PropTypes.node.isRequired
+  loggedInUser: PropTypes.shape({
+    userId: PropTypes.string,
+    id: PropTypes.string
+  })
 };
 
-export default App;
+App.defaultProps = {
+  loggedInUser: {}
+};
+
+const mapStateToProps = ({ loginReducer }) => ({
+  loggedInUser: loginReducer.loggedInUser
+});
+
+export default connect(mapStateToProps)(App);
