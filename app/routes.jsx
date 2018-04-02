@@ -4,10 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import App from './app';
 import '../css/app.less';
-// import LoginLayout from './login/Index';
 import store from './tools/configureStore';
-
-// import ForgotPasswordLayout from './forgotPassword/Index';
 
 const Routes = (
   <Provider store={store}>
