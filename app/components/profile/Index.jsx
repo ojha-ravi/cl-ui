@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import * as profileActions from '../actions/profileActions';
-import NavBar from '../common/navBar/navBar';
+import * as profileActions from '../../actions/profileActions';
+
 import MainContent from './MainContent';
 
 class Index extends Component {
@@ -15,7 +15,7 @@ class Index extends Component {
   }
 
   render() {
-    return [<NavBar key="navBar" />, <MainContent currentProfile={this.props.currentProfile} key="content" />];
+    return <MainContent currentProfile={this.props.currentProfile} key="content" />;
   }
 }
 
