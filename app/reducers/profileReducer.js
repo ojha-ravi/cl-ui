@@ -1,10 +1,7 @@
 import * as actionTypes from '../constants/actionTypes';
+import initialState from './initialState';
 
-const profileInitialState = {
-  currentProfile: {}
-};
-
-const profile = (state = profileInitialState, action) => {
+const profile = (state = initialState.currentProfile, action) => {
   switch (action.type) {
     case actionTypes.GET_PROFILE_SUCCESS:
       return Object.assign({}, state, {

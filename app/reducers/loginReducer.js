@@ -1,9 +1,7 @@
 import * as actionTypes from '../constants/actionTypes';
+import initialState from './initialState';
 
-const loginInitialState = {
-  loggedInUser: {}
-};
-const login = (state = loginInitialState, action) => {
+const login = (state = initialState.loggedInUser, action) => {
   switch (action.type) {
     case actionTypes.LOGIN_SUCCESS:
       return Object.assign({}, state, {
