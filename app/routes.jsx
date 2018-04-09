@@ -4,12 +4,13 @@ import { render } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import App from './app';
+
 import '../css/app.less';
 import store from './tools/configureStore';
 
 const Routes = (
   <Provider store={store}>
-    <BrowserRouter>
+    <BrowserRouter basename="/" forceRefresh>
       <App />
     </BrowserRouter>
   </Provider>

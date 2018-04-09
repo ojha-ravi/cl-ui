@@ -52,7 +52,12 @@ class LoginWindow extends Component {
 
             <FormGroup controlId="formHorizontalPassword">
               <h5>Password</h5>
-              <FormControl type="password" onChange={this.onPasswordChange} value={this.state.password} />
+              <FormControl
+                type="password"
+                onChange={this.onPasswordChange}
+                value={this.state.password}
+                currentpassword="password123"
+              />
             </FormGroup>
             <FormGroup>
               <Link to="/forgotpassword">Forgot Password?</Link>
