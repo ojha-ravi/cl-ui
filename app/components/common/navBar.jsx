@@ -3,13 +3,13 @@ import React from 'react';
 
 /* eslint-disable jsx-a11y/anchor-is-valid */
 const NavBar = () => (
-  <div className="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav className="navbar navbar-inverse">
     <div className="container no-padding">
-      <a className="navbar-brand" href="#">
-        Consumer Lawyer
+      <a className="navbar-brand" href="/">
+        <img src="./assets/logo1.png" alt="Consumer Lawyer" style={{ width: '210px' }} />
       </a>
     </div>
-  </div>
+  </nav>
 );
 /* eslint-enable jsx-a11y/anchor-is-valid */
 
