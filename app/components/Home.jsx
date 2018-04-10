@@ -31,7 +31,7 @@ class Home extends Component {
                 </Button>,
                   '  ',
                 <Button key="list" onClick={this.logComplaint}>
-                    List Complaint
+                    List All Complaint
                 </Button>
                 ]
               : 'you are a lawyer'}
