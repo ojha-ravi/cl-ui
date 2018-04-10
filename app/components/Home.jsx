@@ -24,7 +24,7 @@ class Home extends Component {
       <div>
         <div className="container">
           <div className="row">
-            {this.props.loggedInUser.type === 'consumer'
+            {this.props.loggedInUser.user_type === 'consumer'
               ? [
                 <Button key="log" bsStyle="success" onClick={this.logComplaint}>
                     Log Complaint
@@ -34,7 +34,7 @@ class Home extends Component {
                     List Complaint
                 </Button>
                 ]
-              : 'you are lawyer'}
+              : 'you are a lawyer'}
           </div>
           <div className="row padding-top-20px">{this.state.loggingComplaint ? <CaptureComplain /> : null}</div>
         </div>
@@ -47,7 +47,7 @@ Home.propTypes = {
   loggedInUser: PropTypes.shape({
     userId: PropTypes.string,
     id: PropTypes.string,
-    type: PropTypes.string
+    user_type: PropTypes.string
   })
 };
 
