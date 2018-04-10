@@ -5,10 +5,17 @@ export function saveComplain(params) {
 }
 
 export function uploadDocument({ file, name }) {
-  // eslint-disable-next-line
-  let data = new FormData();
+  const data = new FormData();
   data.append('file', file);
   data.append('name', name);
 
-  return axios.post('/complain/save', data);
+  return axios.post('/document/upload', data).then(res => res.data);
+}
+
+export function deleteDocument({ fileName }) {
+  return axios
+    .delete('/document/delete', {
+      params: { fileName }
+    })
+    .then(res => res.data);
 }

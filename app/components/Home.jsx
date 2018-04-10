@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
-import CaptureComplain from './CaptureComplain';
+import CaptureComplain from '../components/CaptureComplain';
 
 class Home extends Component {
   constructor(props) {
@@ -24,13 +24,17 @@ class Home extends Component {
       <div>
         <div className="container">
           <div className="row">
-            {this.props.loggedInUser.type === 'consumer' ? (
-              <Button bsStyle="success" onClick={this.logComplaint}>
-                Log Complaint
-              </Button>
-            ) : (
-              'you are lawyer'
-            )}
+            {this.props.loggedInUser.type === 'consumer'
+              ? [
+                <Button key="log" bsStyle="success" onClick={this.logComplaint}>
+                    Log Complaint
+                </Button>,
+                  '  ',
+                <Button key="list" onClick={this.logComplaint}>
+                    List Complaint
+                </Button>
+                ]
+              : 'you are lawyer'}
           </div>
           <div className="row padding-top-20px">{this.state.loggingComplaint ? <CaptureComplain /> : null}</div>
         </div>
