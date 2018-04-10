@@ -27,6 +27,7 @@ module.exports = {
     crossOriginLoading: 'use-credentials'
   },
   devServer: {
+    historyApiFallback: true,
     inline: true,
     port: 9090
   },

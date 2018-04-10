@@ -1,6 +1,7 @@
 {
   "globals": {
-    "window": true
+    "window": true,
+    "FormData": true
   },
   "extends": ["airbnb", "prettier"],
   "plugins": ["jsx-a11y", "react"],
