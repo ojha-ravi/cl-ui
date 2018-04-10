@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Button } from 'react-bootstrap';
-import CaptureComplain from '../components/CaptureComplain';
+import CaptureComplain from '../components/complain/CaptureComplain';
 
 class Home extends Component {
   constructor(props) {

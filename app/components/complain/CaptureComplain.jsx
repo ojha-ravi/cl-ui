@@ -1,17 +1,8 @@
 import React, { Component } from 'react';
-import {
-  FormGroup,
-  ControlLabel,
-  FormControl,
-  Button,
-  Panel,
-  Col,
-  Badge,
-  ListGroup,
-  ListGroupItem
-} from 'react-bootstrap';
+import { FormGroup, ControlLabel, FormControl, Button, Panel, Col, ListGroup } from 'react-bootstrap';
 import Select from 'react-select';
-import * as complainHandler from '../apiHandler/complainHandler';
+import * as complainHandler from '../../apiHandler/complainHandler';
+import UploadedFileList from './UploadedFileList';
 
 class CaptureComplain extends Component {
   constructor(props) {
@@ -31,6 +22,7 @@ class CaptureComplain extends Component {
         name: file.name
       })
       .then(res => {
+        this.uploadInput.value = null;
         this.setState({
           uploadedDocument: [...this.state.uploadedDocument, res.data]
         });
@@ -58,7 +50,7 @@ class CaptureComplain extends Component {
         <Panel.Body collapsible>
           <FormGroup>
             <Col sm={3}>
-              <ControlLabel>Title</ControlLabel>
+              <ControlLabel>Type Of Complain</ControlLabel>
               <Select
                 name="form-field-name"
                 onChange={this.handleChange}
@@ -67,11 +59,59 @@ class CaptureComplain extends Component {
             </Col>
             <Col sm={9}>
               <FormGroup controlId="formControlsTextarea">
-                <ControlLabel>Name</ControlLabel>
+                <ControlLabel>Short detail of incidence</ControlLabel>
                 <FormControl componentClass="input" placeholder="Name" />
               </FormGroup>
             </Col>
           </FormGroup>
+
+          <Col sm={3}>
+            <FormGroup>
+              <ControlLabel>Country Of Incidence</ControlLabel>
+              <Select
+                name="form-field-name"
+                onChange={this.handleChange}
+                options={[
+                  { value: 'divorce', label: 'Divorce' },
+                  { value: 'murder', label: 'Murder' },
+                  { value: 'accident', label: 'Accident' },
+                  { value: 'consumer_forum', label: 'Consumer Forum' }
+                ]}
+              />
+            </FormGroup>
+          </Col>
+
+          <Col sm={3}>
+            <FormGroup>
+              <ControlLabel>State Of Incidence</ControlLabel>
+              <Select
+                name="form-field-name"
+                onChange={this.handleChange}
+                options={[
+                  { value: 'divorce', label: 'Divorce' },
+                  { value: 'murder', label: 'Murder' },
+                  { value: 'accident', label: 'Accident' },
+                  { value: 'consumer_forum', label: 'Consumer Forum' }
+                ]}
+              />
+            </FormGroup>
+          </Col>
+
+          <Col sm={3}>
+            <FormGroup>
+              <ControlLabel>Place Of Incidence</ControlLabel>
+              <Select
+                name="form-field-name"
+                onChange={this.handleChange}
+                options={[
+                  { value: 'divorce', label: 'Divorce' },
+                  { value: 'murder', label: 'Murder' },
+                  { value: 'accident', label: 'Accident' },
+                  { value: 'consumer_forum', label: 'Consumer Forum' }
+                ]}
+              />
+            </FormGroup>
+          </Col>
 
           <Col sm={3}>
             <FormGroup>
@@ -91,7 +131,7 @@ class CaptureComplain extends Component {
 
           <Col sm={12}>
             <FormGroup>
-              <ControlLabel>Complain Details</ControlLabel>
+              <ControlLabel>Complain Description</ControlLabel>
               <FormControl componentClass="textarea" placeholder="Short description of the incidence" />
             </FormGroup>
           </Col>
@@ -101,18 +141,15 @@ class CaptureComplain extends Component {
               <ControlLabel>Upload Relevant Files</ControlLabel>
               {this.state.uploadedDocument.length > 0 ? (
                 <ListGroup>
-                  {this.state.uploadedDocument.map((doc, i) => (
-                    <ListGroupItem key={i} className="uploaded-doc">
-                      {doc} {'  '}
-                      <Badge onClick={this.handleFileDelete.bind(this, doc)}>X</Badge>
-                    </ListGroupItem>
+                  {this.state.uploadedDocument.map(doc => (
+                    <UploadedFileList key={doc} doc={doc} handleFileDelete={this.handleFileDelete} />
                   ))}
                 </ListGroup>
               ) : null}
 
-              <FormControl
-                componentClass="input"
+              <input
                 placeholder="Files"
+                value={this.state.value}
                 type="file"
                 ref={ref => {
                   this.uploadInput = ref;
@@ -135,9 +172,5 @@ class CaptureComplain extends Component {
     );
   }
 }
-
-// const mapDispatchToProps = {
-//   getUserProfile: profileActions.getUserProfile
-// };
 
 export default CaptureComplain;
