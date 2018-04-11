@@ -39,3 +39,10 @@ export const indianState = [
   { value: 'jharkhand', label: 'Jharkhand' },
   { value: 'telangana', label: 'Telangana' }
 ];
+
+export const indianPlace = [
+  { value: 'bangalore', label: 'Bangalore' },
+  { value: 'chennai', label: 'Chennai' },
+  { value: 'kolkata', label: 'Kolkata' },
+  { value: 'hyderabad', label: 'Hyderabad' }
+];

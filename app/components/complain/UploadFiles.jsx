@@ -5,7 +5,7 @@ import UploadedFileList from './UploadedFileList';
 
 class UploadFiles extends Component {
   handleFileUpload(e) {
-    this.props.handleFileUpload(e).then(res => {
+    this.props.handleFileUpload(e).then(() => {
       this.uploadInput.value = null;
     });
   }

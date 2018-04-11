@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-import { FormGroup, ControlLabel, FormControl, Button, Panel, Col } from 'react-bootstrap';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { FormGroup, ControlLabel, FormControl, Button, Panel, Col, Row } from 'react-bootstrap';
 import Select from 'react-select';
-import * as complainHandler from '../../apiHandler/complainHandler';
+import * as complainHandler from '../../apiHandler/document';
 import * as UC from '../../constants/uiConstants';
 import UploadFiles from './UploadFiles';
+import * as complainActions from '../../actions/complainActions';
 
 class CaptureComplain extends Component {
   constructor(props) {
@@ -15,6 +18,7 @@ class CaptureComplain extends Component {
     this.handleOnActionTypeChange = this.handleOnChange.bind(this, 'accidentType');
     this.handleOnCountryChange = this.handleOnChange.bind(this, 'country');
     this.handleOnStateChange = this.handleOnChange.bind(this, 'state');
+    this.saveComplain = this.saveComplain.bind(this);
     this.state = {
       shortDesc: '',
       longDesc: '',
@@ -85,6 +89,10 @@ class CaptureComplain extends Component {
     }
   }
 
+  saveComplain() {
+    this.props.saveComplain();
+  }
+
   render() {
     return (
       <Panel eventKey="1" defaultExpanded>
@@ -114,18 +122,22 @@ class CaptureComplain extends Component {
               />
             </FormGroup>
           </Col>
-          <Col sm={4}>
-            <FormGroup>
-              <ControlLabel>Type Of Complain</ControlLabel>
-              <Select
-                value={this.state.accidentType}
-                name="form-field-name"
-                options={UC.accidentType}
-                onChange={this.handleOnActionTypeChange}
-                placeholder="Select Type Of Complain"
-              />
-            </FormGroup>
-          </Col>
+          <Row>
+            <Col sm={12}>
+              <Col sm={4}>
+                <FormGroup>
+                  <ControlLabel>Type Of Complain</ControlLabel>
+                  <Select
+                    value={this.state.accidentType}
+                    name="form-field-name"
+                    options={UC.accidentType}
+                    onChange={this.handleOnActionTypeChange}
+                    placeholder="Select Type Of Complain"
+                  />
+                </FormGroup>
+              </Col>
+            </Col>
+          </Row>
           <Col sm={4}>
             <FormGroup>
               <ControlLabel>Country Of Incidence</ControlLabel>
@@ -150,7 +162,18 @@ class CaptureComplain extends Component {
               />
             </FormGroup>
           </Col>
-
+          <Col sm={4}>
+            <FormGroup>
+              <ControlLabel>Place Of Incidence</ControlLabel>
+              <Select
+                value={this.state.state}
+                name="form-field-name"
+                options={UC.indianPlace}
+                onChange={this.handleOnStateChange}
+                placeholder="Select State"
+              />
+            </FormGroup>
+          </Col>
           <UploadFiles
             uploadedDocument={this.state.uploadedDocument}
             handleFileDelete={this.handleFileDelete}
@@ -159,7 +182,7 @@ class CaptureComplain extends Component {
 
           <FormGroup>
             <Col sm={12}>
-              <Button type="submit" bsStyle="primary">
+              <Button type="submit" bsStyle="primary" onClick={this.saveComplain}>
                 Submit
               </Button>{' '}
               <Button type="submit">Reset</Button>
@@ -171,4 +194,18 @@ class CaptureComplain extends Component {
   }
 }
 
-export default CaptureComplain;
+CaptureComplain.propTypes = {
+  saveComplain: PropTypes.func.isRequired
+};
+
+const mapDispatchToProps = {
+  saveComplain: complainActions.saveComplain,
+  updateComplain: complainActions.updateComplain
+};
+
+const mapStateToProps = ({ complainReducer }) => ({
+  currentComplain: complainReducer.currentComplain,
+  allComplains: complainReducer.allComplains
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CaptureComplain);

@@ -1,6 +1,10 @@
 const initialState = {
   loggedInUser: {},
-  currentProfile: {}
+  currentProfile: {},
+  complains: {
+    currentComplain: {},
+    allComplains: []
+  }
 };
 
 export default initialState;
