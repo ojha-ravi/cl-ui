@@ -18,6 +18,8 @@ class CaptureComplain extends Component {
     this.handleOnActionTypeChange = this.handleOnChange.bind(this, 'accidentType');
     this.handleOnCountryChange = this.handleOnChange.bind(this, 'country');
     this.handleOnStateChange = this.handleOnChange.bind(this, 'state');
+    this.handleOnPlaceChange = this.handleOnChange.bind(this, 'place');
+    this.handleOnFirFilledChange = this.handleOnChange.bind(this, 'fir');
     this.saveComplain = this.saveComplain.bind(this);
     this.state = {
       shortDesc: '',
@@ -25,6 +27,8 @@ class CaptureComplain extends Component {
       accidentType: null,
       country: null,
       state: null,
+      place: null,
+      firNumber: '',
       uploadedDocument: []
     };
   }
@@ -83,14 +87,32 @@ class CaptureComplain extends Component {
           state: val
         });
         break;
-
+      case 'place':
+        this.setState({
+          place: val
+        });
+        break;
+      case 'fir':
+        this.setState({
+          firNumber: val.target.value
+        });
+        break;
       default:
         break;
     }
   }
 
   saveComplain() {
-    this.props.saveComplain();
+    this.props.saveComplain({
+      short_description: this.state.shortDesc,
+      long_description: this.state.longDesc,
+      complain_type: this.state.accidentType.label,
+      country: this.state.country.label,
+      state: this.state.state.label,
+      place: this.state.place.label,
+      fir_filed_number: this.state.firNumber,
+      create_by: this.props.loggedInUser.user_id
+    });
   }
 
   render() {
@@ -136,6 +158,18 @@ class CaptureComplain extends Component {
                   />
                 </FormGroup>
               </Col>
+
+              <Col sm={4}>
+                <FormGroup>
+                  <ControlLabel>FIR Filled Number</ControlLabel>
+                  <FormControl
+                    componentClass="input"
+                    placeholder="Short Description"
+                    onChange={this.handleOnFirFilledChange}
+                    value={this.state.firNumber}
+                  />
+                </FormGroup>
+              </Col>
             </Col>
           </Row>
           <Col sm={4}>
@@ -166,10 +200,10 @@ class CaptureComplain extends Component {
             <FormGroup>
               <ControlLabel>Place Of Incidence</ControlLabel>
               <Select
-                value={this.state.state}
+                value={this.state.place}
                 name="form-field-name"
                 options={UC.indianPlace}
-                onChange={this.handleOnStateChange}
+                onChange={this.handleOnPlaceChange}
                 placeholder="Select State"
               />
             </FormGroup>
@@ -195,7 +229,15 @@ class CaptureComplain extends Component {
 }
 
 CaptureComplain.propTypes = {
+  loggedInUser: PropTypes.shape({
+    user_id: PropTypes.string,
+    id: PropTypes.string
+  }),
   saveComplain: PropTypes.func.isRequired
+};
+
+CaptureComplain.defaultProps = {
+  loggedInUser: {}
 };
 
 const mapDispatchToProps = {
@@ -203,7 +245,8 @@ const mapDispatchToProps = {
   updateComplain: complainActions.updateComplain
 };
 
-const mapStateToProps = ({ complainReducer }) => ({
+const mapStateToProps = ({ complainReducer, loginReducer }) => ({
+  loggedInUser: loginReducer.loggedInUser,
   currentComplain: complainReducer.currentComplain,
   allComplains: complainReducer.allComplains
 });
