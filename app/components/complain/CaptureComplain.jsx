@@ -1,31 +1,42 @@
 import React, { Component } from 'react';
-import { FormGroup, ControlLabel, FormControl, Button, Panel, Col, ListGroup } from 'react-bootstrap';
+import { FormGroup, ControlLabel, FormControl, Button, Panel, Col } from 'react-bootstrap';
 import Select from 'react-select';
 import * as complainHandler from '../../apiHandler/complainHandler';
-import UploadedFileList from './UploadedFileList';
+import * as UC from '../../constants/uiConstants';
+import UploadFiles from './UploadFiles';
 
 class CaptureComplain extends Component {
   constructor(props) {
     super(props);
     this.handleFileUpload = this.handleFileUpload.bind(this);
     this.handleFileDelete = this.handleFileDelete.bind(this);
+    this.handleOnShortDescriptionChange = this.handleOnChange.bind(this, 'shortDescription');
+    this.handleOnLongDescriptionChange = this.handleOnChange.bind(this, 'longDescription');
+    this.handleOnActionTypeChange = this.handleOnChange.bind(this, 'accidentType');
+    this.handleOnCountryChange = this.handleOnChange.bind(this, 'country');
+    this.handleOnStateChange = this.handleOnChange.bind(this, 'state');
     this.state = {
+      shortDesc: '',
+      longDesc: '',
+      accidentType: null,
+      country: null,
+      state: null,
       uploadedDocument: []
     };
   }
 
   handleFileUpload({ target: { files } }) {
     const file = files[0];
-    complainHandler
+    return complainHandler
       .uploadDocument({
         file,
         name: file.name
       })
       .then(res => {
-        this.uploadInput.value = null;
         this.setState({
           uploadedDocument: [...this.state.uploadedDocument, res.data]
         });
+        return res;
       });
   }
 
@@ -41,6 +52,39 @@ class CaptureComplain extends Component {
       });
   }
 
+  handleOnChange(control, val) {
+    switch (control) {
+      case 'shortDescription':
+        this.setState({
+          shortDesc: val.target.value
+        });
+        break;
+      case 'longDescription':
+        this.setState({
+          longDesc: val.target.value
+        });
+        break;
+      case 'accidentType':
+        this.setState({
+          accidentType: val
+        });
+        break;
+      case 'country':
+        this.setState({
+          country: val
+        });
+        break;
+      case 'state':
+        this.setState({
+          state: val
+        });
+        break;
+
+      default:
+        break;
+    }
+  }
+
   render() {
     return (
       <Panel eventKey="1" defaultExpanded>
@@ -48,116 +92,70 @@ class CaptureComplain extends Component {
           <Panel.Title toggle>Enter the complaint details</Panel.Title>
         </Panel.Heading>
         <Panel.Body collapsible>
-          <FormGroup>
-            <Col sm={3}>
+          <Col sm={12}>
+            <FormGroup controlId="formControlsTextarea">
+              <ControlLabel>Short Description Of Complain</ControlLabel>
+              <FormControl
+                componentClass="input"
+                placeholder="Short Description"
+                onChange={this.handleOnShortDescriptionChange}
+                value={this.state.shortDesc}
+              />
+            </FormGroup>
+          </Col>
+          <Col sm={12}>
+            <FormGroup controlId="formControlsTextarea">
+              <ControlLabel>Tell Us What Happened In Detail</ControlLabel>
+              <FormControl
+                componentClass="textarea"
+                placeholder="Long Description"
+                onChange={this.handleOnLongDescriptionChange}
+                value={this.state.longDesc}
+              />
+            </FormGroup>
+          </Col>
+          <Col sm={4}>
+            <FormGroup>
               <ControlLabel>Type Of Complain</ControlLabel>
               <Select
+                value={this.state.accidentType}
                 name="form-field-name"
-                onChange={this.handleChange}
-                options={[{ value: 'mr', label: 'Mr' }, { value: 'ms', label: 'Ms' }, { value: 'mss', label: 'Mss' }]}
+                options={UC.accidentType}
+                onChange={this.handleOnActionTypeChange}
+                placeholder="Select Type Of Complain"
               />
-            </Col>
-            <Col sm={9}>
-              <FormGroup controlId="formControlsTextarea">
-                <ControlLabel>Short detail of incidence</ControlLabel>
-                <FormControl componentClass="input" placeholder="Name" />
-              </FormGroup>
-            </Col>
-          </FormGroup>
-
-          <Col sm={3}>
+            </FormGroup>
+          </Col>
+          <Col sm={4}>
             <FormGroup>
               <ControlLabel>Country Of Incidence</ControlLabel>
               <Select
+                value={this.state.country}
                 name="form-field-name"
-                onChange={this.handleChange}
-                options={[
-                  { value: 'divorce', label: 'Divorce' },
-                  { value: 'murder', label: 'Murder' },
-                  { value: 'accident', label: 'Accident' },
-                  { value: 'consumer_forum', label: 'Consumer Forum' }
-                ]}
+                options={UC.country}
+                onChange={this.handleOnCountryChange}
+                placeholder="Select Country"
               />
             </FormGroup>
           </Col>
-
-          <Col sm={3}>
+          <Col sm={4}>
             <FormGroup>
               <ControlLabel>State Of Incidence</ControlLabel>
               <Select
+                value={this.state.state}
                 name="form-field-name"
-                onChange={this.handleChange}
-                options={[
-                  { value: 'divorce', label: 'Divorce' },
-                  { value: 'murder', label: 'Murder' },
-                  { value: 'accident', label: 'Accident' },
-                  { value: 'consumer_forum', label: 'Consumer Forum' }
-                ]}
+                options={UC.indianState}
+                onChange={this.handleOnStateChange}
+                placeholder="Select State"
               />
             </FormGroup>
           </Col>
 
-          <Col sm={3}>
-            <FormGroup>
-              <ControlLabel>Place Of Incidence</ControlLabel>
-              <Select
-                name="form-field-name"
-                onChange={this.handleChange}
-                options={[
-                  { value: 'divorce', label: 'Divorce' },
-                  { value: 'murder', label: 'Murder' },
-                  { value: 'accident', label: 'Accident' },
-                  { value: 'consumer_forum', label: 'Consumer Forum' }
-                ]}
-              />
-            </FormGroup>
-          </Col>
-
-          <Col sm={3}>
-            <FormGroup>
-              <ControlLabel>Type of complain</ControlLabel>
-              <Select
-                name="form-field-name"
-                onChange={this.handleChange}
-                options={[
-                  { value: 'divorce', label: 'Divorce' },
-                  { value: 'murder', label: 'Murder' },
-                  { value: 'accident', label: 'Accident' },
-                  { value: 'consumer_forum', label: 'Consumer Forum' }
-                ]}
-              />
-            </FormGroup>
-          </Col>
-
-          <Col sm={12}>
-            <FormGroup>
-              <ControlLabel>Complain Description</ControlLabel>
-              <FormControl componentClass="textarea" placeholder="Short description of the incidence" />
-            </FormGroup>
-          </Col>
-
-          <Col sm={6}>
-            <FormGroup>
-              <ControlLabel>Upload Relevant Files</ControlLabel>
-              {this.state.uploadedDocument.length > 0 ? (
-                <ListGroup>
-                  {this.state.uploadedDocument.map(doc => (
-                    <UploadedFileList key={doc} doc={doc} handleFileDelete={this.handleFileDelete} />
-                  ))}
-                </ListGroup>
-              ) : null}
-
-              <input
-                placeholder="Files"
-                value={this.state.value}
-                type="file"
-                ref={ref => {
-                  this.uploadInput = ref;
-                }}
-                onChange={this.handleFileUpload}
-              />
-            </FormGroup>
-          </Col>
+          <UploadFiles
+            uploadedDocument={this.state.uploadedDocument}
+            handleFileDelete={this.handleFileDelete}
+            handleFileUpload={this.handleFileUpload}
+          />
 
           <FormGroup>
             <Col sm={12}>
