@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Table, Panel } from 'react-bootstrap';
 import PropTypes from 'prop-types';
+
 import * as complainActions from '../../actions/complainActions';
+import ComplainRow from './ComplainRow';
 
 class ListComplain extends Component {
   constructor(props) {
@@ -15,11 +18,38 @@ class ListComplain extends Component {
     });
   }
 
-  getComplain() {}
+  getComplain(complain) {
+    this.props.showComplain({
+      complainId: complain.id
+    });
+  }
 
   render() {
     console.log(this.props.allComplains);
-    return <div>Hello World</div>;
+    return (
+      <Panel>
+        <Panel.Heading>
+          <Panel.Title toggle>List of all the Complaints</Panel.Title>
+        </Panel.Heading>
+        <Panel.Body>
+          <Table striped bordered condensed hover>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Complaint ID</th>
+                <th>Short Description</th>
+                <th>Create on</th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.props.allComplains.map((ac, i) => (
+                <ComplainRow complain={ac} index={i} key={ac.id} onComplainClick={this.getComplain} />
+              ))}
+            </tbody>
+          </Table>
+        </Panel.Body>
+      </Panel>
+    );
   }
 }
 
@@ -28,9 +58,11 @@ ListComplain.propTypes = {
     user_id: PropTypes.string,
     id: PropTypes.string
   }),
-  allComplains: PropTypes.shape({
-    complain_type: PropTypes.string
-  }).isRequired,
+  allComplains: PropTypes.arrayOf(
+    PropTypes.shape({
+      complain_type: PropTypes.string
+    })
+  ).isRequired,
   getAllComplain: PropTypes.func.isRequired
 };
 
@@ -39,7 +71,8 @@ ListComplain.defaultProps = {
 };
 
 const mapDispatchToProps = {
-  getAllComplain: complainActions.getAllComplain
+  getAllComplain: complainActions.getAllComplain,
+  showComplain: complainActions.showComplain
 };
 
 const mapStateToProps = ({ complainReducer, loginReducer }) => ({
