@@ -1,9 +1,5 @@
 import axios from './axios';
 
-export function saveComplain(params) {
-  return axios.post('/complain/save', { params });
-}
-
 export function uploadDocument({ file, name }) {
   const data = new FormData();
   data.append('file', file);

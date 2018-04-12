@@ -15,12 +15,14 @@ class App extends Component {
     this.uiUnBlocking = this.uiUnBlocking.bind(this);
   }
 
+  /* eslint-disable */
   uiBlocking() {
     console.log('Blocking');
   }
   uiUnBlocking() {
     console.log('not Blocking');
   }
+  /* eslint-enable */
 
   render() {
     const { props } = this;
@@ -31,7 +33,7 @@ class App extends Component {
             <NavBar key="navBar" />
             <main>
               <Switch>
-                <Route exact path="/" component={Home} uiBlocking={this.uiBlocking} uiUnBlocking={this.uiUnBlocking} />
+                <Route exact path="/" component={Home} />
                 <Route
                   path="/profile"
                   component={ProfileLayout}
