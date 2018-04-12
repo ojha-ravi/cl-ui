@@ -11,6 +11,10 @@ const complain = (state = initialState.complains, action) => {
       return Object.assign({}, state, {
         allComplains: action.data
       });
+    case actionTypes.GET_ALL_COMPLAIN_SUCCESS:
+      return Object.assign({}, state, {
+        allComplains: action.data
+      });
     default:
       return state;
   }
