@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 
 class ComplainRow extends Component {
@@ -23,5 +24,13 @@ class ComplainRow extends Component {
     );
   }
 }
+
+ComplainRow.propTypes = {
+  complain: PropTypes.shape({
+    complain_type: PropTypes.string
+  }).isRequired,
+  index: PropTypes.number.isRequired,
+  onComplainClick: PropTypes.func.isRequired
+};
 
 export default ComplainRow;

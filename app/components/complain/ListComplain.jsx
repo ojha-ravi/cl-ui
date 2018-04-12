@@ -63,6 +63,7 @@ ListComplain.propTypes = {
       complain_type: PropTypes.string
     })
   ).isRequired,
+  showComplain: PropTypes.func.isRequired,
   getAllComplain: PropTypes.func.isRequired
 };
 
