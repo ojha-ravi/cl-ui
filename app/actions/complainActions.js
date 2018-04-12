@@ -64,3 +64,9 @@ export function updateComplain(params) {
       .then(updateComplainSuccess)
       .then(dispatch);
 }
+
+export function removeCurrentComplainSelection() {
+  return {
+    type: actionTypes.REMOVE_CURRENT_COMPLAIN_SELECTION
+  };
+}

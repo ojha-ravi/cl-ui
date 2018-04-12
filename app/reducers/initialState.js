@@ -2,7 +2,7 @@ const initialState = {
   loggedInUser: {},
   currentProfile: {},
   complains: {
-    currentComplain: {},
+    selectedComplain: {},
     allComplains: []
   }
 };

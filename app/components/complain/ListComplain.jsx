@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Table, Panel } from 'react-bootstrap';
 import PropTypes from 'prop-types';
-
 import * as complainActions from '../../actions/complainActions';
 import ComplainRow from './ComplainRow';
+import Complain from './Complain';
 
 class ListComplain extends Component {
   constructor(props) {
@@ -25,13 +25,13 @@ class ListComplain extends Component {
   }
 
   render() {
-    console.log(this.props.allComplains);
     return (
       <Panel>
         <Panel.Heading>
           <Panel.Title toggle>List of all the Complaints</Panel.Title>
         </Panel.Heading>
         <Panel.Body>
+          <Complain />
           <Table striped bordered condensed hover>
             <thead>
               <tr>

@@ -208,11 +208,13 @@ class CaptureComplain extends Component {
               />
             </FormGroup>
           </Col>
-          <UploadFiles
-            uploadedDocument={this.state.uploadedDocument}
-            handleFileDelete={this.handleFileDelete}
-            handleFileUpload={this.handleFileUpload}
-          />
+          <Col sm={6}>
+            <UploadFiles
+              uploadedDocument={this.state.uploadedDocument}
+              handleFileDelete={this.handleFileDelete}
+              handleFileUpload={this.handleFileUpload}
+            />
+          </Col>
 
           <FormGroup>
             <Col sm={12}>
@@ -247,7 +249,6 @@ const mapDispatchToProps = {
 
 const mapStateToProps = ({ complainReducer, loginReducer }) => ({
   loggedInUser: loginReducer.loggedInUser,
-  currentComplain: complainReducer.currentComplain,
   allComplains: complainReducer.allComplains
 });
 

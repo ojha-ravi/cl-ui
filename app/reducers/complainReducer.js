@@ -11,6 +11,14 @@ const complain = (state = initialState.complains, action) => {
       return Object.assign({}, state, {
         allComplains: action.data
       });
+    case actionTypes.SHOW_COMPLAIN_SUCCESS:
+      return Object.assign({}, state, {
+        selectedComplain: action.data
+      });
+    case actionTypes.REMOVE_CURRENT_COMPLAIN_SELECTION:
+      return Object.assign({}, state, {
+        selectedComplain: {}
+      });
     case actionTypes.GET_ALL_COMPLAIN_SUCCESS:
       return Object.assign({}, state, {
         allComplains: action.data
