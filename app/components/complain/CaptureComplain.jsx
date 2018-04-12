@@ -20,7 +20,7 @@ class CaptureComplain extends Component {
     this.handleOnStateChange = this.handleOnChange.bind(this, 'state');
     this.handleOnPlaceChange = this.handleOnChange.bind(this, 'place');
     this.handleOnFirFilledChange = this.handleOnChange.bind(this, 'fir');
-    this.saveComplain = this.saveComplain.bind(this);
+    this.createComplain = this.createComplain.bind(this);
     this.state = {
       shortDesc: '',
       longDesc: '',
@@ -102,8 +102,8 @@ class CaptureComplain extends Component {
     }
   }
 
-  saveComplain() {
-    this.props.saveComplain({
+  createComplain() {
+    this.props.createComplain({
       short_description: this.state.shortDesc,
       long_description: this.state.longDesc,
       complain_type: this.state.accidentType.label,
@@ -216,7 +216,7 @@ class CaptureComplain extends Component {
 
           <FormGroup>
             <Col sm={12}>
-              <Button type="submit" bsStyle="primary" onClick={this.saveComplain}>
+              <Button type="submit" bsStyle="primary" onClick={this.createComplain}>
                 Submit
               </Button>{' '}
               <Button type="submit">Reset</Button>
@@ -233,7 +233,7 @@ CaptureComplain.propTypes = {
     user_id: PropTypes.string,
     id: PropTypes.string
   }),
-  saveComplain: PropTypes.func.isRequired
+  createComplain: PropTypes.func.isRequired
 };
 
 CaptureComplain.defaultProps = {
@@ -241,7 +241,7 @@ CaptureComplain.defaultProps = {
 };
 
 const mapDispatchToProps = {
-  saveComplain: complainActions.saveComplain,
+  createComplain: complainActions.createComplain,
   updateComplain: complainActions.updateComplain
 };
 

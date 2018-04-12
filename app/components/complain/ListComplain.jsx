@@ -43,7 +43,7 @@ class ListComplain extends Component {
             </thead>
             <tbody>
               {this.props.allComplains.map((ac, i) => (
-                <ComplainRow complain={ac} index={i} key={ac.id} onComplainClick={this.getComplain} />
+                <ComplainRow complain={ac} index={i + 1} key={ac.id} onComplainClick={this.getComplain} />
               ))}
             </tbody>
           </Table>

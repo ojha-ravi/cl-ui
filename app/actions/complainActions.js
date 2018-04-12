@@ -47,10 +47,10 @@ export function showComplain(params) {
       .then(dispatch);
 }
 
-export function saveComplain(params) {
+export function createComplain(params) {
   return dispatch =>
     complainHandler
-      .saveComplain(params)
+      .createComplain(params)
       .then(res => res.data)
       .then(saveComplainSuccess)
       .then(dispatch);

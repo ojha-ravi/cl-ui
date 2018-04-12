@@ -8,7 +8,7 @@ export function showComplain(params) {
   return axios.get('/complain/show', { params }).then(res => res.data);
 }
 
-export function saveComplain(params) {
+export function createComplain(params) {
   return axios.post('/complain/create', params).then(res => res.data);
 }
 

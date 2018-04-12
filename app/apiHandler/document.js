@@ -15,7 +15,3 @@ export function deleteDocument({ fileName }) {
     })
     .then(res => res.data);
 }
-
-export function saveComplain(params) {
-  return axios.post('/complain/save', { params }).then(res => res.data);
-}
