@@ -29,7 +29,8 @@ class Complain extends React.Component {
     return complainHandler
       .uploadDocument({
         file,
-        name: file.name
+        name: file.name,
+        complainId: this.props.selectedComplain.id
       })
       .then(res => {
         this.setState({

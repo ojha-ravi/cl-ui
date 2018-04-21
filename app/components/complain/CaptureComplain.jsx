@@ -208,16 +208,9 @@ class CaptureComplain extends Component {
               />
             </FormGroup>
           </Col>
-          <Col sm={6}>
-            <UploadFiles
-              uploadedDocument={this.state.uploadedDocument}
-              handleFileDelete={this.handleFileDelete}
-              handleFileUpload={this.handleFileUpload}
-            />
-          </Col>
-
           <FormGroup>
             <Col sm={12}>
+              <hr />
               <Button type="submit" bsStyle="primary" onClick={this.createComplain}>
                 Submit
               </Button>{' '}
